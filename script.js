@@ -34,3 +34,38 @@ function renderProjects() {
 
 searchInput.addEventListener("input", renderProjects);
 sortSelect.addEventListener("change", renderProjects);
+
+document.querySelectorAll(".project-slideshow").forEach((slideshow) => {
+  const images = Array.from(slideshow.querySelectorAll(".slideshow-track img"));
+  const dots = Array.from(slideshow.querySelectorAll(".slideshow-dots .dot"));
+  const interval = Number(slideshow.dataset.interval) || 3500;
+  let current = images.findIndex((img) => img.classList.contains("is-active"));
+  if (current < 0) current = 0;
+  let timer;
+
+  function show(index) {
+    images[current].classList.remove("is-active");
+    dots[current]?.classList.remove("is-active");
+    current = index;
+    images[current].classList.add("is-active");
+    dots[current]?.classList.add("is-active");
+  }
+
+  function next() {
+    show((current + 1) % images.length);
+  }
+
+  function restart() {
+    clearInterval(timer);
+    timer = setInterval(next, interval);
+  }
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      show(index);
+      restart();
+    });
+  });
+
+  restart();
+});

@@ -313,6 +313,55 @@ h2 {
   object-fit: cover;
 }
 
+.project-slideshow {
+  position: relative;
+  background: #16181c;
+}
+
+.slideshow-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slideshow-track img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.slideshow-track img.is-active {
+  opacity: 1;
+}
+
+.slideshow-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.slideshow-dots .dot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+}
+
+.slideshow-dots .dot.is-active {
+  background: #ffffff;
+}
+
 .project-copy {
   display: flex;
   flex-direction: column;
